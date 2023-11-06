@@ -25,7 +25,7 @@ const Navbar = () => {
                             <li><NavLink to={"/"}>Home</NavLink></li>
                             <li><NavLink to={"/addBlog"}>Add Blog</NavLink></li>
                             <li><NavLink to={"/allBlogs"}>All Blogs</NavLink></li>
-                            <li><NavLink to={"/featuredBlogs"}>Featured Blogs</NavLink></li>
+                            <li><NavLink to={"/users"}>Featured Blogs</NavLink></li>
                             <li><NavLink to={"/wishList"}>Wish List</NavLink></li>
 
 
@@ -38,7 +38,7 @@ const Navbar = () => {
                         <li><NavLink to={"/"}>Home</NavLink></li>
                         <li><NavLink to={"/addBlog"}>Add Blog</NavLink></li>
                         <li><NavLink to={"/allBlogs"}>All Blogs</NavLink></li>
-                        <li><NavLink to={"/featuredBlogs"}>Featured Blogs</NavLink></li>
+                        <li><NavLink to={"/users"}>Featured Blogs</NavLink></li>
                         <li><NavLink to={"/wishList"}>Wish List</NavLink></li>
 
 
