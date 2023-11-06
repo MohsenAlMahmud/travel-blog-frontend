@@ -1,3 +1,4 @@
+import { useLoaderData } from "react-router-dom";
 import Banner from "./Banner";
 import Footer from "./Footer";
 
@@ -6,11 +7,11 @@ import RecentBlogs from "./RecentBlogs";
 
 
 const Home = () => {
+    const blogs = useLoaderData();
     return (
-        <div>
-            
+        <div>                        
             <Banner></Banner>
-            <RecentBlogs></RecentBlogs>
+            <RecentBlogs blogs={blogs}></RecentBlogs>
             <NewsLetter></NewsLetter>
             <Footer></Footer>
         </div>

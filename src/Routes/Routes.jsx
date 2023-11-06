@@ -7,6 +7,7 @@ import UpdateBlog from "../Pages/Blogs/UpdateBlog";
 import BlogDetails from "../Pages/Blogs/BlogDetails";
 import Login from "../ClientAuthentication/Login";
 import Register from "../ClientAuthentication/Register";
+import RecentBlogs from "../Pages/Home/RecentBlogs";
 
 
 const router = createBrowserRouter([
@@ -16,7 +17,8 @@ const router = createBrowserRouter([
       children: [
         {
             path: "/",
-            element: <Home></Home>
+            element: <Home></Home>,
+            loader: () => fetch(`http://localhost:5000/blogs`)
         },
         {
             path: "addBlog",
@@ -26,7 +28,7 @@ const router = createBrowserRouter([
             path: "allBlogs",
             element: <AllBlogs></AllBlogs>,
             loader: () => fetch(`http://localhost:5000/blogs`)
-        },
+        },        
         {
             path: "/blogDetails/:id",
             element: <BlogDetails></BlogDetails>,

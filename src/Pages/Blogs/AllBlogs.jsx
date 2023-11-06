@@ -12,10 +12,10 @@ const AllBlogs = () => {
     const filteredBlogs = blogs.filter((blog) => {
         return (
             (selectedCategory === "All" || blog.category === selectedCategory) &&
-            (blog.title.toLowerCase().includes(searchQuery.toLowerCase()) || searchQuery === "")
+            (blog.tittle.toLowerCase().includes(searchQuery.toLowerCase()) || searchQuery === "")
         );
     });
-    const categories = ["All", "Solo Adventure", "Family Exploration", "Romantic Getaway", "Volunteer and Humanitarian Trips", "Group Travel", "Business Travel"];
+    const categories = ["All", "Solo Adventure", "Family Exploration", "Romantic Gateway", "Volunteer and Humanitarian Trips", "Group Travel", "Business Travel"];
 
     const handleCategoryChange = (e) => {
         setSelectedCategory(e.target.value);
@@ -53,8 +53,8 @@ const AllBlogs = () => {
                     <div key={blog._id}>
                         <div className="card w-96 bg-neutral text-neutral-content">
                             <div className="card-body items-center text-center">
-                                <h2 className="card-title">{blog.title}</h2>
-                                <img src="https://i.ibb.co/TKKJchx/sasha-freemind-n-Xo2-Zs-KHTHg-unsplash.jpg" alt="" />
+                                <h2 className="card-title">{blog.tittle}</h2>
+                                <img src={blog.image} alt="" />
                                 <h2 className="card-title">{blog.shortDescription}</h2>
                                 <h2 className="card-title">{blog.category}</h2>
                                 <div className="card-actions justify-end">

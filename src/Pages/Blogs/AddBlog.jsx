@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddBlog = () => {
 
@@ -21,7 +22,10 @@ const AddBlog = () => {
               },
             });
             console.log(response.data);
-          } catch (error) {
+            Swal.fire('Blog Submitted Successfully')
+            form.reset();
+          } 
+          catch (error) {
             console.log(error);
           }
     }
