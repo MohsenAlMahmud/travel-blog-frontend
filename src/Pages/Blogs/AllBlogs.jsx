@@ -24,6 +24,24 @@ const AllBlogs = () => {
         setSearchQuery(e.target.value);
     };
 
+    // Function to add a blog to the user's wish list
+    const addToWishList = (blogId) => {
+        // Send a request to your server to add the blog to the wish list
+        fetch(`/add-to-wishlist/${blogId}`, {
+            method: "POST",
+        })
+        .then((response) => {
+            if (response.ok) {
+                // Blog added to the wish list successfully
+                console.log("Blog added to Wish List");
+            } else {
+                // Handle error if the blog was not added
+                console.error("Failed to add blog to Wish List");
+            }
+        })
+        .catch((error) => console.error(error));
+    };
+
     return (
 
         <div>
@@ -61,8 +79,8 @@ const AllBlogs = () => {
                                     <Link to={`/blogDetails/${blog._id}`}>
                                         <button className="btn btn-primary">Details</button>
                                     </Link>
-                                    {/* <Link to={`/wishList/${user._id}`}> */}
-                                        <button className="btn btn-ghost">Wish List</button>
+                                    {/* <Link to={`/wishList/${blog._id}`}> */}
+                                    <button className="btn btn-ghost" onClick={() => addToWishList(blog._id)}>Add to Wish List</button>
                                     {/* </Link> */}
                                 </div>
                             </div>
