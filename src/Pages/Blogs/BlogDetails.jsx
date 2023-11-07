@@ -24,7 +24,20 @@ const BlogDetails = () => {
 
     const isBlogAuthor = user && user.email === blog.email;
 
-    
+    const fetchComments = () => {
+        fetch(`http://localhost:5000/comments?blogId=${id}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setComments(data);
+            });
+    };
+
+    useEffect(() => {
+        fetchComments(); // Fetch comments when the component first loads
+        // Poll for new comments every 5 seconds (you can adjust the interval)
+        const interval = setInterval(fetchComments, 1000);
+        return () => clearInterval(interval); // Clear the interval when the component unmounts
+    }, [id]);
 
     const handleComments = (e) => {
         e.preventDefault();

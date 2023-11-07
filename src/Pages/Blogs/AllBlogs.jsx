@@ -10,12 +10,11 @@ const AllBlogs = () => {
     console.log(blogs)
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
-
-    // const filteredBlogs = selectedCategory === "All" ? blogs : blogs.filter(blog => blog.category === selectedCategory);
+   
     const filteredBlogs = blogs.filter((blog) => {
         return (
-            (selectedCategory === "All" || blog.category === selectedCategory) &&
-            ((blog.tittle && blog.tittle.toLowerCase().includes(searchQuery.toLowerCase())) || searchQuery === "")
+            (selectedCategory === "All" || blog?.category === selectedCategory) &&
+            ((blog?.tittle && blog?.tittle.toLowerCase().includes(searchQuery.toLowerCase())) || searchQuery === "")
         );
     });
     const categories = ["All", "Solo Adventure", "Family Exploration", "Romantic Gateway", "Volunteer and Humanitarian Trips", "Group Travel", "Business Travel"];
@@ -27,33 +26,14 @@ const AllBlogs = () => {
         setSearchQuery(e.target.value);
     };
 
-    // Function to add a blog to the user's wish list
-    // const handleWishList = (blogId) => {
-    //     // Send a request to your server to add the blog to the wish list
-    //     fetch(`http://localhost:5000/wishList/${blogId}`, {
-    //         method: "POST",
-    //     })
-    //     .then((response) => {
-    //         if (response.ok) {
-    //             // Blog added to the wish list successfully
-    //             console.log("Blog added to Wish List");
-    //         } else {
-    //             // Handle error if the blog was not added
-    //             console.error("Failed to add blog to Wish List");
-    //         }
-    //     })
-    //     .catch((error) => console.error(error));
-    // };
+    
     const handleWishList = (blog) => {
-        // blog.preventDefault();
-
-
-        // const comment = form.comment.value;
-        // const email = user?.email;
+        
         const wishListData = {
 
             blogId: blog._id,
             blogName: blog.name,
+            blogEmail: blog.email,
             blogTittle: blog.tittle,
             blogCategory: blog.category,
             blogImage: blog.image,
