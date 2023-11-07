@@ -13,17 +13,17 @@ const UpdateBlog = () => {
     const handleUpdateBlog = async (e) => {
         e.preventDefault();
         const form = e.target;
-        const title = form.title.value;
+        const tittle = form.tittle.value;
         const image = form.image.value;
         const category = form.category.value;
         const shortDescription = form.shortDescription.value;
         const longDescription = form.longDescription.value;
-        const blogData = { image, title, category, shortDescription, longDescription };
+        const blogData = { image, tittle, category, shortDescription, longDescription };
         console.log(blogData);
 
      
 
-        axios.put(`https://travel-blog-backend-gamma.vercel.app/blogs/${singleBlog._id}`, blogData, {
+        axios.put(`http://localhost:5000/blogs/${singleBlog._id}`, blogData, {
             headers: {
               'Content-Type': 'application/json',
             }

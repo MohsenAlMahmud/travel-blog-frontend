@@ -50,7 +50,8 @@ const Navbar = () => {
                             <><span className="px-3"><img className="w-12 rounded-full" src={user.photoURL ? user.photoURL : "https://i.ibb.co/MSHTpdv/user.jpg"} alt="picture" /></span><button onClick={handleSignOut} className="btn btn-ghost">Sign Out</button></>
 
                             :
-                            <Link to='/login'><button className="btn btn-ghost">Login</button></Link>
+                            <><span className="px-3"><Link to='/register'><button className="btn btn-ghost">Register</button></Link></span><Link to='/login'><button className="btn btn-ghost">Login</button></Link></>
+                            
                     }
                 </div>
             </div>

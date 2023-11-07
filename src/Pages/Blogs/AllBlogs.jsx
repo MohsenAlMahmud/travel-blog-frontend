@@ -30,7 +30,7 @@ const AllBlogs = () => {
     // Function to add a blog to the user's wish list
     // const handleWishList = (blogId) => {
     //     // Send a request to your server to add the blog to the wish list
-    //     fetch(`https://travel-blog-backend-gamma.vercel.app/wishList/${blogId}`, {
+    //     fetch(`http://localhost:5000/wishList/${blogId}`, {
     //         method: "POST",
     //     })
     //     .then((response) => {
@@ -76,19 +76,7 @@ const AllBlogs = () => {
                     Swal.fire('Your Wishes Added Successfully')
                 }
             })
-    //     try {
-    //         const response = axios.post("https://travel-blog-backend-gamma.vercel.app/wishes", wishListData, {
-    //           headers: {
-    //             'Content-Type': 'application/json',
-    //           },
-    //         });
-    //         console.log(response.data);
-    //         Swal.fire('Blog Submitted Successfully')
-            
-    //       } 
-    //       catch (error) {
-    //         console.log(error);
-    //       }
+    
     }
 
     return (
@@ -128,9 +116,9 @@ const AllBlogs = () => {
                                     <Link to={`/blogDetails/${blog._id}`}>
                                         <button className="btn btn-primary">Details</button>
                                     </Link>
-                                    {/* <Link to={`/wishList/${blog._id}`}> */}
+                                    
                                     <button className="btn btn-ghost" onClick={() => handleWishList(blog)}>Add to Wish List</button>
-                                    {/* </Link> */}
+                                    
                                 </div>
                             </div>
                         </div>

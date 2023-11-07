@@ -1,8 +1,43 @@
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const RecentBlogs = ({blogs}) => {    
     const sortedBlogs = blogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));    
     const recentBlogs = sortedBlogs.slice(0, 6);
+    const handleWishList = (blog) => {
+        // blog.preventDefault();
+
+
+        // const comment = form.comment.value;
+        // const email = user?.email;
+        const wishListData = {
+
+            blogId: blog._id,
+            blogName: blog.name,
+            blogTittle: blog.tittle,
+            blogCategory: blog.category,
+            blogImage: blog.image,
+            blogShortDescription: blog.shortDescription,
+            blogLongDescription: blog.longDescription,
+        }
+        console.log(wishListData);
+
+        fetch('http://localhost:5000/wishes', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(wishListData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire('Your Wishes Added Successfully')
+                }
+            })
+    
+    }
 
     return (
         <div>
@@ -17,11 +52,9 @@ const RecentBlogs = ({blogs}) => {
                         <h2 className="card-title">{blog.category}</h2>
                         <div className="card-actions justify-end">
                             <Link to={`/blogDetails/${blog._id}`}>
-                                <button className="btn btn-primary">Details</button>
-                            </Link>
-                            {/* <Link to={`/wishList/${user._id}`}> */}
-                                <button className="btn btn-ghost">Wish List</button>
-                            {/* </Link> */}
+                                <button className="btn btn-ghost">Details</button>
+                            </Link>                            
+                            <button className="btn btn-ghost" onClick={() => handleWishList(blog)}>Add to Wish List</button>                           
                         </div>
                     </div>
                 </div>
