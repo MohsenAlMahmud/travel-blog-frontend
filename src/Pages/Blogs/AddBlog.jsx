@@ -1,18 +1,22 @@
 import axios from "axios";
+import { useContext } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../ClientAuthentication/AuthProvider";
 
 const AddBlog = () => {
 
+    const {user} = useContext(AuthContext);
     const handleBlog = async(e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
+        const email = form.email.value;
         const tittle = form.tittle.value;
         const image = form.image.value;
         const category = form.category.value;
         const shortDescription = form.shortDescription.value;
         const longDescription = form.longDescription.value;
-        const blogData = { image, name, tittle, category, shortDescription, longDescription };
+        const blogData = { image, name, email, tittle, category, shortDescription, longDescription };
         console.log(blogData);
 
         
@@ -41,6 +45,12 @@ const AddBlog = () => {
                         <span className="label-text text-lg font-medium">Name</span>
                     </label>
                     <input type="text" name="name" placeholder="Your Name" className="input input-bordered" />
+                </div>
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text text-lg font-medium">Email</span>
+                    </label>
+                    <input type="email" name="email" defaultValue={user.email} readOnly placeholder="Your Email" className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">

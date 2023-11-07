@@ -1,20 +1,38 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useLoaderData, useParams } from "react-router-dom";
 import { AuthContext } from "../../ClientAuthentication/AuthProvider";
 import Swal from "sweetalert2";
 
-
 const BlogDetails = () => {
-
     const blogs = useLoaderData();
     const { id } = useParams();
-    const blog = blogs.find(blog => blog._id == id);
-    console.log(blog);
+    const blog = blogs.find((blog) => blog._id == id);
+    console.log(blog)
     const { user } = useContext(AuthContext);
-    console.log({ user })
+    console.log(user)
+
+    const [comments, setComments] = useState([]);
+    const [commentText, setCommentText] = useState("");
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/comments?blogId=${id}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setComments(data);
+            });
+    }, [id]);
+
+    const isBlogAuthor = user && user.email === blog.email;
+
+    
 
     const handleComments = (e) => {
         e.preventDefault();
+
+        if (isBlogAuthor) {
+            Swal.fire("Can not comment on your own blog");
+            return;
+        }
 
         const form = e.target;
         const comment = form.comment.value;
@@ -22,30 +40,26 @@ const BlogDetails = () => {
         const postComment = {
             comment,
             email,
-            blogId: blog._id, 
-            blogName: blog.name, 
-            blogTitle: blog.tittle,
-            blogImage: blog.image, 
-            blogShortDescription: blog.shortDescription,
-            blogLongDescription: blog.longDescription,
-        }
-        console.log(postComment);
+            blogId: blog._id,
+        };
 
-        fetch('http://localhost:5000/users', {
+
+        fetch('http://localhost:5000/comments', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
             },
-            body: JSON.stringify(postComment)
+            body: JSON.stringify(postComment),
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
+            .then((res) => res.json())
+            .then((data) => {
                 if (data.insertedId) {
-                    Swal.fire('Your Comment Posted Successfully')
+                    setCommentText("");
+                    Swal.fire('Your Comment Posted Successfully');
                 }
-            })
-    }
+            });
+    };
+
 
 
     return (
@@ -53,39 +67,53 @@ const BlogDetails = () => {
             <div className=" bg-neutral text-neutral-content">
                 <div className="card-body items-center">
                     <h2 className="card-title">{blog.tittle}</h2>
-                    <img src="https://i.ibb.co/TKKJchx/sasha-freemind-n-Xo2-Zs-KHTHg-unsplash.jpg" alt="" />
+                    <img src={blog.image} alt="" />
                     <h2 className="card-title">Category : {blog.category}</h2>
                     <p>Short Description : {blog.shortDescription}</p>
                     <p>Details : {blog.longDescription}</p>
                     <div className="card-actions justify-end">
-                        <Link to={`/updateBlog/${blog._id}`}><button className="btn btn-primary">Update Blog</button></Link>
-
+                        {user && user.email === blog.email && (
+                            <Link to={`/updateBlog/${blog._id}`}>
+                                <button className="btn btn-primary">Update Blog</button>
+                            </Link>
+                        )}
                     </div>
                 </div>
             </div>
-            <div className="py-4">
-                <h2 className="text-3xl py-4">Comments.....</h2>
-                <form onSubmit={handleComments} className="card-body">
-                    <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 className="text-3xl py-4">Comments.....</h2>
+            <div className="">
+                <div className="py-4">
+                    <form onSubmit={handleComments} className="flex">
 
-
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Date</span>
-                            </label>
-                            <textarea type="date" name="comment" placeholder="Comments here..." className="textarea textarea-bordered textarea-lg w-full" ></textarea>
-
+                        <div className="form-control flex-1">
+                            <textarea
+                                type="text"
+                                name="comment"
+                                value={commentText}
+                                required
+                                onChange={(e) => setCommentText(e.target.value)}
+                                placeholder="Comments here..."
+                                className="textarea textarea-bordered textarea-lg w-full"
+                            />
                         </div>
+                        <div className="form-control mt-6 flex-6">
+                            <input className="btn btn-primary btn-block" type="submit" value="Post" />
+                        </div>
+                    </form>
+                </div>
 
-                    </div>
-                    <div className="form-control mt-6">
-
-                        <input className="btn btn-primary btn-block" type="submit" value="Post" />
-                    </div>
-                </form>
-
+                <div className="py-4">
+                    {comments.map((comment, index) => (
+                        <div key={index} className="">
+                            <p>{comment.comment}</p>
+                            <div className="flex">
+                                <img className="w-4 h-4 rounded-full mx-6" src={comment.photoURL || "https://i.ibb.co/MSHTpdv/user.jpg"} alt="" />
+                                <p>Name: {comment.displayName || "User"}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-
         </div>
     );
 };
