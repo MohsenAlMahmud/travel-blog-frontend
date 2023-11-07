@@ -24,6 +24,15 @@ const BlogDetails = () => {
 
     const isBlogAuthor = user && user.email === blog.email;
 
+    const [loadingComments, setLoadingComments] = useState(true); // Track if comments are loading
+
+    useEffect(() => {
+        // Simulate loading comments
+        setTimeout(() => {
+            setLoadingComments(false);
+        }, 2000); // Simulated 2-second delay
+    }, []);
+    
     const fetchComments = () => {
         fetch(`http://localhost:5000/comments?blogId=${id}`)
             .then((res) => res.json())
