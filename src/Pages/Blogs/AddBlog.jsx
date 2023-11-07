@@ -6,17 +6,18 @@ const AddBlog = () => {
     const handleBlog = async(e) => {
         e.preventDefault();
         const form = e.target;
+        const name = form.name.value;
         const tittle = form.tittle.value;
         const image = form.image.value;
         const category = form.category.value;
         const shortDescription = form.shortDescription.value;
         const longDescription = form.longDescription.value;
-        const blogData = { image, tittle, category, shortDescription, longDescription };
+        const blogData = { image, name, tittle, category, shortDescription, longDescription };
         console.log(blogData);
 
         
         try {
-            const response = await axios.post("http://localhost:5000/blogs", blogData, {
+            const response = await axios.post("https://travel-blog-backend-gamma.vercel.app/blogs", blogData, {
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -35,6 +36,12 @@ const AddBlog = () => {
 
             <h2 className="text-4xl text-center py-16">Add New Blog</h2>
             <form onSubmit={handleBlog} className="lg:w-1/2 mx-auto">
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text text-lg font-medium">Name</span>
+                    </label>
+                    <input type="text" name="name" placeholder="Your Name" className="input input-bordered" />
+                </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text text-lg font-medium">Tittle</span>

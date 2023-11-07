@@ -9,7 +9,9 @@ import Login from "../ClientAuthentication/Login";
 import Register from "../ClientAuthentication/Register";
 import WishList from "../Pages/Users/WishList";
 import FeaturedBlogs from "../Pages/Users/FeaturedBlogs";
+import Page404 from "../Pages/Home/Page404";
 import PrivateRoute from "../PrivateRoute";
+// import PrivateRoute from "../PrivateRoute";
 
 
 
@@ -21,26 +23,26 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
-                loader: () => fetch(`http://localhost:5000/blogs`)
+                loader: () => fetch(`https://travel-blog-backend-gamma.vercel.app/blogs`)
             },
             {
                 path: "addBlog",
-                element: <AddBlog></AddBlog>
+                element: <PrivateRoute><AddBlog></AddBlog></PrivateRoute>,
             },
             {
                 path: "allBlogs",
                 element: <AllBlogs></AllBlogs>,
-                loader: () => fetch(`http://localhost:5000/blogs`)
+                loader: () => fetch(`https://travel-blog-backend-gamma.vercel.app/blogs`)
             },
             {
                 path: "/blogDetails/:id",
-                element: <BlogDetails></BlogDetails>,
-                loader: () => fetch(`http://localhost:5000/blogs`)
+                element: <PrivateRoute><BlogDetails></BlogDetails></PrivateRoute>,
+                loader: () => fetch(`https://travel-blog-backend-gamma.vercel.app/blogs`)
             },
             {
                 path: "/updateBlog/:id",
-                element: <UpdateBlog></UpdateBlog>,
-                loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
+                element: <PrivateRoute><UpdateBlog></UpdateBlog></PrivateRoute>,
+                loader: ({ params }) => fetch(`https://travel-blog-backend-gamma.vercel.app/blogs/${params.id}`)
             },
             {
                 path: "/users",
@@ -48,9 +50,9 @@ const router = createBrowserRouter([
                 
             },
             {
-                path: "/wishList/:id",
+                path: "/wishList",
                 element: <WishList></WishList>,
-                loader: () => fetch(`http://localhost:5000/blogs`)
+                loader: () => fetch(`http://localhost:5000/wishes`)
             },
             {
                 path: '/login',
@@ -59,6 +61,10 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/*',
+                element: <Page404></Page404>
             },
         ]
     },

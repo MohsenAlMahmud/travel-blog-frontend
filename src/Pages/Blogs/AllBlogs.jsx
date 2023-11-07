@@ -1,10 +1,13 @@
+// import axios from "axios";
 import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const AllBlogs = () => {
 
     const blogs = useLoaderData();
+    console.log(blogs)
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -12,7 +15,7 @@ const AllBlogs = () => {
     const filteredBlogs = blogs.filter((blog) => {
         return (
             (selectedCategory === "All" || blog.category === selectedCategory) &&
-            (blog.tittle.toLowerCase().includes(searchQuery.toLowerCase()) || searchQuery === "")
+            ((blog.tittle && blog.tittle.toLowerCase().includes(searchQuery.toLowerCase())) || searchQuery === "")
         );
     });
     const categories = ["All", "Solo Adventure", "Family Exploration", "Romantic Gateway", "Volunteer and Humanitarian Trips", "Group Travel", "Business Travel"];
@@ -25,22 +28,68 @@ const AllBlogs = () => {
     };
 
     // Function to add a blog to the user's wish list
-    const addToWishList = (blogId) => {
-        // Send a request to your server to add the blog to the wish list
-        fetch(`/add-to-wishlist/${blogId}`, {
-            method: "POST",
+    // const handleWishList = (blogId) => {
+    //     // Send a request to your server to add the blog to the wish list
+    //     fetch(`https://travel-blog-backend-gamma.vercel.app/wishList/${blogId}`, {
+    //         method: "POST",
+    //     })
+    //     .then((response) => {
+    //         if (response.ok) {
+    //             // Blog added to the wish list successfully
+    //             console.log("Blog added to Wish List");
+    //         } else {
+    //             // Handle error if the blog was not added
+    //             console.error("Failed to add blog to Wish List");
+    //         }
+    //     })
+    //     .catch((error) => console.error(error));
+    // };
+    const handleWishList = (blog) => {
+        // blog.preventDefault();
+
+
+        // const comment = form.comment.value;
+        // const email = user?.email;
+        const wishListData = {
+
+            blogId: blog._id,
+            blogName: blog.name,
+            blogTittle: blog.tittle,
+            blogCategory: blog.category,
+            blogImage: blog.image,
+            blogShortDescription: blog.shortDescription,
+            blogLongDescription: blog.longDescription,
+        }
+        console.log(wishListData);
+
+        fetch('http://localhost:5000/wishes', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(wishListData)
         })
-        .then((response) => {
-            if (response.ok) {
-                // Blog added to the wish list successfully
-                console.log("Blog added to Wish List");
-            } else {
-                // Handle error if the blog was not added
-                console.error("Failed to add blog to Wish List");
-            }
-        })
-        .catch((error) => console.error(error));
-    };
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire('Your Wishes Added Successfully')
+                }
+            })
+    //     try {
+    //         const response = axios.post("https://travel-blog-backend-gamma.vercel.app/wishes", wishListData, {
+    //           headers: {
+    //             'Content-Type': 'application/json',
+    //           },
+    //         });
+    //         console.log(response.data);
+    //         Swal.fire('Blog Submitted Successfully')
+            
+    //       } 
+    //       catch (error) {
+    //         console.log(error);
+    //       }
+    }
 
     return (
 
@@ -58,7 +107,7 @@ const AllBlogs = () => {
                 <div className="search-bar py-6 ">
                     <input
                         type="text"
-                        placeholder="Search by title"
+                        placeholder="Search by tittle"
                         value={searchQuery}
                         onChange={handleSearchQueryChange}
                         className="p-3 rounded"
@@ -80,7 +129,7 @@ const AllBlogs = () => {
                                         <button className="btn btn-primary">Details</button>
                                     </Link>
                                     {/* <Link to={`/wishList/${blog._id}`}> */}
-                                    <button className="btn btn-ghost" onClick={() => addToWishList(blog._id)}>Add to Wish List</button>
+                                    <button className="btn btn-ghost" onClick={() => handleWishList(blog)}>Add to Wish List</button>
                                     {/* </Link> */}
                                 </div>
                             </div>

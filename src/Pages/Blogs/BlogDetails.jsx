@@ -23,6 +23,7 @@ const BlogDetails = () => {
             comment,
             email,
             blogId: blog._id, 
+            blogName: blog.name, 
             blogTitle: blog.tittle,
             blogImage: blog.image, 
             blogShortDescription: blog.shortDescription,
@@ -30,7 +31,7 @@ const BlogDetails = () => {
         }
         console.log(postComment);
 
-        fetch('http://localhost:5000/users', {
+        fetch('https://travel-blog-backend-gamma.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

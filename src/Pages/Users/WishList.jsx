@@ -1,43 +1,34 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../ClientAuthentication/AuthProvider";
+
 
 const WishList = () => {
-    const { id } = useParams();
-    const [blog, setBlog] = useState(null);
-
-    useEffect(() => {
-        // Fetch the blog by ID
-        fetch(`/blogs/${id}`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then((data) => setBlog(data))
-            .catch((error) => console.error(error));
-    }, [id]);
-
-    if (!blog) {
-        return <div>Loading...</div>;
-    }
+    const wishes = useLoaderData();
+    console.log(wishes)
+    const user = useContext(AuthContext);
+    const userWishes = wishes.filter((wish) => wish.userId === user.id);
 
     return (
         <div>
-            <h2>This is the wish list</h2>
-            <div className="card w-96 bg-neutral text-neutral-content">
-                <div className="card-body items-center">
-                    <h2 className="card-title">{blog.tittle}</h2>
-                    <img src={blog.image} alt="" />
-                    <h2 className="card-title">Category: {blog.category}</h2>
-                    <p>Short Description: {blog.shortDescription}</p>
-                    <p>Details: {blog.longDescription}</p>
-                    <div className="card-actions justify-end">
-                        <button>Remove</button>
-                    </div>
-                </div>
+      <h2>wishes: {userWishes.length}</h2>
+      {userWishes.map((wish) => (
+        <div key={wish._id} className="card w-96 bg-neutral text-neutral-content">
+          <div className="card-body items-center">
+            <h2 className="card-title">{wish.blogTittle}</h2>
+            <img src={wish.blogImage} alt="" />
+            
+            <p>Short Description: {wish.blogShortDescription}</p>
+            <h2 className="card-title">Category: {wish.blogCategory}</h2>
+            
+            <div className="card-actions justify-end">
+              <button>Detail</button>
+              <button>Remove</button>
             </div>
+          </div>
         </div>
+      ))}
+    </div>
     );
 };
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const UpdateBlog = () => {
@@ -22,13 +23,14 @@ const UpdateBlog = () => {
 
      
 
-        axios.put(`http://localhost:5000/blogs/${singleBlog._id}`, blogData, {
+        axios.put(`https://travel-blog-backend-gamma.vercel.app/blogs/${singleBlog._id}`, blogData, {
             headers: {
               'Content-Type': 'application/json',
             }
           })       
             .then((response) => {
               console.log(response.data);
+              Swal.fire('Blog Updated Successfully')
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -42,9 +44,15 @@ const UpdateBlog = () => {
             <form onSubmit={handleUpdateBlog} className="lg:w-1/2 mx-auto">
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text text-lg font-medium">Title</span>
+                        <span className="label-text text-lg font-medium">Name</span>
                     </label>
-                    <input type="text" defaultValue={singleBlog?.title} name="title" placeholder="title" className="input input-bordered" />
+                    <input type="text" defaultValue={singleBlog?.name} name="name" placeholder="Your Name" className="input input-bordered" />
+                </div>
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text text-lg font-medium">Tittle</span>
+                    </label>
+                    <input type="text" defaultValue={singleBlog?.tittle} name="tittle" placeholder="tittle" className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">
