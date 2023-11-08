@@ -124,9 +124,9 @@ const BlogDetails = () => {
                     </form>
                 </div>
 
-                <div className="py-4">
+                <div className="mx-8 border py-4">
                     {comments.map((comment, index) => (
-                        <div key={index} className="">
+                        <div border key={index} className="">
                             <p>{comment.comment}</p>
                             <div className="flex">
                                 <img className="w-4 h-4 rounded-full mx-6" src={comment.photoURL || "https://i.ibb.co/MSHTpdv/user.jpg"} alt="" />
