@@ -18,7 +18,7 @@ const WishList = () => {
   if (!user) {
     return (
       <div>
-        <h2 className="text-3xl font-bold ml-6">Please log in to see your wishes and add some wishes.</h2>
+        <h2 className="text-3xl font-bold ml-6">Please login and add some wishes to see your wishes.</h2>
       </div>
     );
   }
