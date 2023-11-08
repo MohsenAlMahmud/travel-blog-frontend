@@ -11,7 +11,7 @@ import WishList from "../Pages/Users/WishList";
 import FeaturedBlogs from "../Pages/Users/FeaturedBlogs";
 import Page404 from "../Pages/Home/Page404";
 import PrivateRoute from "../PrivateRoute";
-// import PrivateRoute from "../PrivateRoute";
+
 
 
 
@@ -46,8 +46,8 @@ const router = createBrowserRouter([
             },
             {
                 path: "/users",
-                element: <PrivateRoute><FeaturedBlogs></FeaturedBlogs></PrivateRoute>,
-                
+                element: <FeaturedBlogs></FeaturedBlogs>,
+                loader: () => fetch(`https://travel-blog-backend-gamma.vercel.app/blogs`)
             },
             {
                 path: "/wishList",

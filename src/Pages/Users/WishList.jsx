@@ -24,8 +24,6 @@ const WishList = () => {
   }
 
   const handleRemoveWish = (id) => {
-
-
     fetch(`https://travel-blog-backend-gamma.vercel.app/wishes/${id}`, {
       method: "DELETE",
     })
@@ -41,8 +39,7 @@ const WishList = () => {
   };
 
   return (
-    <div>
-      {/* <h2 className="text-3xl font-bold ml-6">You have {wishes.length} Wishes</h2>   */}
+    <div>      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {userWishes.map((wish) => (
           <div key={wish._id} className="card w-96 bg-neutral text-neutral-content">

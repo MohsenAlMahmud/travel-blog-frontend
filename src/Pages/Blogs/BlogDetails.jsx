@@ -24,13 +24,12 @@ const BlogDetails = () => {
 
     const isBlogAuthor = user && user.email === blog.email;
 
-    const [loadingComments, setLoadingComments] = useState(true); // Track if comments are loading
+    const [loadingComments, setLoadingComments] = useState(true); 
 
-    useEffect(() => {
-        // Simulate loading comments
+    useEffect(() => {        
         setTimeout(() => {
             setLoadingComments(false);
-        }, 2000); // Simulated 2-second delay
+        }, 2000);
     }, []);
     
     const fetchComments = () => {
@@ -42,15 +41,13 @@ const BlogDetails = () => {
     };
 
     useEffect(() => {
-        fetchComments(); // Fetch comments when the component first loads
-        // Poll for new comments every 5 seconds (you can adjust the interval)
+        fetchComments();        
         const interval = setInterval(fetchComments, 1000);
-        return () => clearInterval(interval); // Clear the interval when the component unmounts
+        return () => clearInterval(interval); 
     }, [id]);
 
     const handleComments = (e) => {
         e.preventDefault();
-
         if (isBlogAuthor) {
             Swal.fire("Can not comment on your own blog");
             return;

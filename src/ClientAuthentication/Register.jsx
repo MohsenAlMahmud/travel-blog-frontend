@@ -49,8 +49,7 @@ const Register = () => {
     }
 
     return (
-        <div className="w-9/12 mx-auto">
-            {/* <Navbar></Navbar> */}
+        <div className="w-9/12 mx-auto">            
             <div>
                 <h2 className="text-4xl text-center py-16">Please Register</h2>
                 <form onSubmit={handleRegister} className="lg:w-1/2 mx-auto">
