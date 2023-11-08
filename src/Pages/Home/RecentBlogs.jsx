@@ -1,19 +1,19 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../ClientAuthentication/AuthProvider";
 
 const RecentBlogs = ({blogs}) => {  
+    const {user} = useContext(AuthContext)
     console.log(blogs)  
     const sortedBlogs = blogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));    
     const recentBlogs = sortedBlogs.slice(0, 6);
     const handleWishList = (blog) => {
-        // blog.preventDefault();
-
-
-        // const comment = form.comment.value;
-        // const email = user?.email;
+       
         const wishListData = {
 
             blogId: blog._id,
+            userEmail: user.email,
             blogName: blog.name,
             blogEmail: blog.email,
             blogTittle: blog.tittle,

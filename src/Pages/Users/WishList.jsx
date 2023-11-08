@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../ClientAuthentication/AuthProvider";
+import Swal from "sweetalert2";
 
 const WishList = () => {
   const wishes = useLoaderData();
@@ -30,6 +31,7 @@ const WishList = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        Swal.fire('Your Wishes Removed Successfully')
 
         setUserWishes((prevUserWishes) =>
           prevUserWishes.filter((wish) => wish?._id !== id)

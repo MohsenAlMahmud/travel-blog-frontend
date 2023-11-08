@@ -6,12 +6,6 @@ import app from "../firebase/firebase.config";
 import { useContext } from "react";
 
 
-// import app from "../firebase/firebase.config";
-// import { GoogleAuthProvider } from "firebase/auth";
-
-
-
-
 const Login = () => {
 
     const auth = getAuth(app);

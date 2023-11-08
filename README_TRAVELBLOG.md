@@ -12,3 +12,4 @@ Access valuable resources, including travel tips, packing lists, and essential i
 
 
 # Client Side Live Link:
+https://eclectic-quokka-610824.netlify.app
