@@ -42,7 +42,7 @@ const AllBlogs = () => {
         }
         console.log(wishListData);
 
-        fetch('http://localhost:5000/wishes', {
+        fetch('https://travel-blog-backend-gamma.vercel.app/wishes', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

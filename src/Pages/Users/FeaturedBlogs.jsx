@@ -8,7 +8,7 @@ const FeaturedBlogs = () => {
     const [users, setUsers] = useState([]);
     console.log(users);
 
-    const url = `http://localhost:5000/users?email=${user?.email}`;
+    const url = `https://travel-blog-backend-gamma.vercel.app/users?email=${user?.email}`;
     useEffect(() => {
         fetch(url)
             .then(res => res.json())

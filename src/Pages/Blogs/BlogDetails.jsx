@@ -15,7 +15,7 @@ const BlogDetails = () => {
     const [commentText, setCommentText] = useState("");
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comments?blogId=${id}`)
+        fetch(`https://travel-blog-backend-gamma.vercel.app/comments?blogId=${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setComments(data);
@@ -34,7 +34,7 @@ const BlogDetails = () => {
     }, []);
     
     const fetchComments = () => {
-        fetch(`http://localhost:5000/comments?blogId=${id}`)
+        fetch(`https://travel-blog-backend-gamma.vercel.app/comments?blogId=${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setComments(data);
@@ -66,7 +66,7 @@ const BlogDetails = () => {
         };
 
 
-        fetch('http://localhost:5000/comments', {
+        fetch('https://travel-blog-backend-gamma.vercel.app/comments', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -133,7 +133,7 @@ const BlogDetails = () => {
                                 <p>Name: {comment.displayName || "User"}</p>
                             </div>
                         </div>
-                    ))}
+                    ))} 
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@ const AddBlog = () => {
 
         
         try {
-            const response = await axios.post("http://localhost:5000/blogs", blogData, {
+            const response = await axios.post("https://travel-blog-backend-gamma.vercel.app/blogs", blogData, {
               headers: {
                 'Content-Type': 'application/json',
               },

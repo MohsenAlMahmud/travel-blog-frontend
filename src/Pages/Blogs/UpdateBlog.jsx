@@ -23,7 +23,7 @@ const UpdateBlog = () => {
 
      
 
-        axios.put(`http://localhost:5000/blogs/${singleBlog._id}`, blogData, {
+        axios.put(`https://travel-blog-backend-gamma.vercel.app/blogs/${singleBlog._id}`, blogData, {
             headers: {
               'Content-Type': 'application/json',
             }

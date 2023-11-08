@@ -23,7 +23,7 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
-                loader: () => fetch(`http://localhost:5000/blogs`)
+                loader: () => fetch(`https://travel-blog-backend-gamma.vercel.app/blogs`)
             },
             {
                 path: "addBlog",
@@ -32,17 +32,17 @@ const router = createBrowserRouter([
             {
                 path: "allBlogs",
                 element: <AllBlogs></AllBlogs>,
-                loader: () => fetch(`http://localhost:5000/blogs`)
+                loader: () => fetch(`https://travel-blog-backend-gamma.vercel.app/blogs`)
             },
             {
                 path: "/blogDetails/:id",
                 element: <PrivateRoute><BlogDetails></BlogDetails></PrivateRoute>,
-                loader: () => fetch(`http://localhost:5000/blogs`)
+                loader: () => fetch(`https://travel-blog-backend-gamma.vercel.app/blogs`)
             },
             {
                 path: "/updateBlog/:id",
                 element: <PrivateRoute><UpdateBlog></UpdateBlog></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
+                loader: ({ params }) => fetch(`https://travel-blog-backend-gamma.vercel.app/blogs/${params.id}`)
             },
             {
                 path: "/users",
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
             {
                 path: "/wishList",
                 element: <WishList></WishList>,
-                loader: () => fetch(`http://localhost:5000/wishes`)
+                loader: () => fetch(`https://travel-blog-backend-gamma.vercel.app/wishes`)
             },
             {
                 path: '/login',

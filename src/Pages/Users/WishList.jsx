@@ -11,7 +11,7 @@ const WishList = () => {
   const [userWishes, setUserWishes] = useState([]);
   
   useEffect(() => {
-    const filteredWishes = wishes.filter((wish) => wish?.email === user?.email);
+    const filteredWishes = wishes.filter((wish) => wish?.blogEmail == user?.email);
     
     setUserWishes(filteredWishes);
   }, [wishes, user]);
@@ -19,7 +19,7 @@ const WishList = () => {
   const handleRemoveWish = (id) => {
 
     
-    fetch(`http://localhost:5000/wishes/${id}`, {
+    fetch(`https://travel-blog-backend-gamma.vercel.app/wishes/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

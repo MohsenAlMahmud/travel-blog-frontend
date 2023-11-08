@@ -12,7 +12,7 @@ const handleNewsLetter = (e) => {
 const NewsLetter = () => {
     return (
         <div>
-            <div className="hero">
+            <div className="hero mt-20">
                 <div className="hero-content flex-col lg:flex-row">
                     <img src="https://i.ibb.co/GF0kTG8/news-letter-image.jpg" className="max-w-sm rounded-lg shadow-2xl" />
                     <div>
