@@ -4,7 +4,7 @@ const BestPlaceToVisit = () => {
     return (
         <div>
             <h2 className="text-5xl font-bold p-6 text-center mt-20">BEST PLACE TO VISIT</h2>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <img src="https://i.ibb.co/sPTPsFc/saint-martin.jpg" alt="" />
                 <img src="https://i.ibb.co/LJw7kwM/Sundarbans.jpg" alt="" />
                 <img src="https://i.ibb.co/dp6zWZz/bandorbon-pmg.jpg" alt="" />

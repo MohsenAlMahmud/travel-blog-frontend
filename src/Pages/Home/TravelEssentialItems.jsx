@@ -4,7 +4,7 @@ const TravelEssentialItems = () => {
     return (
         <div>
             <h2 className="text-5xl font-bold text-center py-8 mt-20">TRAVEL ESSENTIALS ITEMS</h2>
-            <div className="grid grid-cols-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                 <div>
                     <div className="card bg-base-100 shadow-xl">
                         <figure className="px-10 pt-10">

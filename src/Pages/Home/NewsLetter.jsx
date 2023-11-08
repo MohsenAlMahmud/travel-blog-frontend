@@ -6,6 +6,7 @@ const handleNewsLetter = (e) => {
     const email = form.get('email');
     if (email) {
         Swal.fire('Thank you for subscribing to our newsletter');
+        e.currentTarget.reset();
     }
 };
 

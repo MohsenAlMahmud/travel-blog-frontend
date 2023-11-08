@@ -44,7 +44,7 @@ const Navbar = () => {
 
                     </ul>
                 </div>
-                <div className="navbar-end p-4 hidden lg:flex">
+                <div className="navbar-end p-4 lg:flex">
                     {
                         user ?
                             <><span className="px-3"><img className="w-12 rounded-full" src={user.photoURL ? user.photoURL : "https://i.ibb.co/MSHTpdv/user.jpg"} alt="picture" /></span><button onClick={handleSignOut} className="btn btn-ghost">Sign Out</button></>

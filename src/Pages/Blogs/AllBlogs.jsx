@@ -1,10 +1,13 @@
 // import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../ClientAuthentication/AuthProvider";
 
 
 const AllBlogs = () => {
+
+    const {user} = useContext(AuthContext);
 
     const blogs = useLoaderData();
     console.log(blogs)
@@ -32,6 +35,7 @@ const AllBlogs = () => {
         const wishListData = {
 
             blogId: blog._id,
+            userEmail: user.email,
             blogName: blog.name,
             blogEmail: blog.email,
             blogTittle: blog.tittle,
@@ -62,7 +66,7 @@ const AllBlogs = () => {
     return (
 
         <div>
-            <div className="flex justify-between mr-8">
+            <div className="md:flex justify-between mr-8">
                 <div className="filter-dropdown py-6">
                     <select className="p-3 rounded" id="category" name="category" value={selectedCategory} onChange={handleCategoryChange}>
                         {categories.map((category) => (
