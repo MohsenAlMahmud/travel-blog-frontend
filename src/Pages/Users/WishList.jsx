@@ -52,8 +52,8 @@ const WishList = () => {
               <p>Short Description: {wish.blogShortDescription}</p>
               <h2 className="card-title">Category: {wish.blogCategory}</h2>
               <div className="card-actions justify-end">
-                <button>Detail</button>
-                <button onClick={() => handleRemoveWish(wish._id)}>Remove</button>
+                <button className="btn btn-accent">Detail</button>
+                <button className="btn btn-accent" onClick={() => handleRemoveWish(wish._id)}>Remove</button>
               </div>
             </div>
           </div>
