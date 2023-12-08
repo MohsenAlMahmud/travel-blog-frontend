@@ -7,9 +7,9 @@ const BlogDetails = () => {
     const blogs = useLoaderData();
     const { id } = useParams();
     const blog = blogs.find((blog) => blog._id == id);
-    console.log(blog)
+    // console.log(blog)
     const { user } = useContext(AuthContext);
-    console.log(user)
+    // console.log(user)
 
     const [comments, setComments] = useState([]);
     const [commentText, setCommentText] = useState("");
@@ -44,7 +44,7 @@ const BlogDetails = () => {
         fetchComments();        
         const interval = setInterval(fetchComments, 1000);
         return () => clearInterval(interval); 
-    }, [id]);
+    }, []);
 
     const handleComments = (e) => {
         e.preventDefault();
@@ -126,8 +126,8 @@ const BlogDetails = () => {
                         <div border key={index} className="">
                             <p>{comment.comment}</p>
                             <div className="flex">
-                                <img className="w-4 h-4 rounded-full mx-6" src={comment.photoURL || "https://i.ibb.co/MSHTpdv/user.jpg"} alt="" />
-                                <p>Name: {comment.displayName || "User"}</p>
+                                <img className="w-4 h-4 rounded-full mx-6" src={comment.photoURL ? comment.photoURL : "https://i.ibb.co/MSHTpdv/user.jpg"} alt="" />
+                                <p>Name: {comment.displayName ? comment.displayName : "User"}</p>
                             </div>
                         </div>
                     ))} 
